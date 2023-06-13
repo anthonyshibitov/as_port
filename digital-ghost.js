@@ -57,3 +57,5 @@ setTimeout(() => {
 setTimeout(() => {
   printText("• postgresql, express, node.", "text-3", 50);
 }, 6500)
+
+export { printText };

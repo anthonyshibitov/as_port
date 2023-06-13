@@ -4,64 +4,75 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>portfolio</title>
   </head>
   <body>
     <canvas></canvas>
-    <header>
-      <div>anthony ************</div>
-      <div class="line-wrapper-container">
-        <div class="line-wrapper">
-          <div id="line1"></div>
-          <div id="line2"></div>
-          <div id="line3"></div>
-        </div>
-        <div class="line-wrapper lw-right">
-          <div id="line4"></div>
-          <div id="line5"></div>
-        </div>
-      </div>
-    </header>
 
-    <main>
-      <div class="hero-wrapper">
-        <div id="hero" class="hero-text"></div>
-      </div>
-      <!-- <div class="about-wrapper">
-        <div class="about-text" id="about">
-          hi - i'm anthony. i'm a 27 year old web developer located in new york. here are some of my projects below.
+    <div class="panel-container">
+      <div class="panel">
+        <div class="panel-border"></div>
+        <header>
+          <div>anthony shibitov ***</div>
+          <div class="line-wrapper-container">
+            <div class="line-wrapper">
+              <div id="line1"></div>
+              <div id="line2"></div>
+              <div id="line3"></div>
+            </div>
+            <div class="line-wrapper lw-right">
+              <div id="line4"></div>
+              <div id="line5"></div>
+            </div>
+          </div>
+        </header>
+        <div class="hero-wrapper">
+          <div id="hero" class="hero-text"></div>
         </div>
-      </div> -->
-      <div class="text-body">
-          <div id="text" class="text"></div>
+        <div class="panel-one-text-wrapper">
+          <div class="panel-one-text-center">
+            <div class="text-body">
+              <div id="text" class="text"></div>
+            </div>
+            <div class="text-body">
+              <div id="text-2" class="text"></div>
+            </div>
+            <div class="text-body">
+              <div id="text-3" class="text"></div>
+            </div>
+            <div class="text-body">
+              <div id="fin"></div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-wrapper">swipe to continue..</div>
+        <div class="big-div"></div>
       </div>
-      <div class="text-body">
-          <div id="text-2" class="text"></div>
-      </div>
-      <div class="text-body">
-          <div id="text-3" class="text"></div>
-      </div>
-      <div class="text-body">
-          <div id="fin"></div>
-      </div>
-      <div class="scroll-wrapper">
-        scroll to continue..
-      </div>
-    </main>
 
-    <div class="big-div" style="font-family: 'Sono'">
-      long dummy content :p
+      <div class="panel">
+        <div class="panel-border"></div>
+        <div class="about-wrapper">
+          <div id="about" class="about-text"></div>
+      </div>
     </div>
 
     <footer>
       <div class="footer-wrapper">
-        <div>sasha</div>
-        <div>Anthony ************ 2023</div>
+        <div>portfolio 2023</div>
+        <div>*** Anthony Shibitov 2023</div>
       </div>
     </footer>
   </body>
-  <script src="digital-ghost.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "../build/three.module.js",
+        "three/addons/": "./jsm/"
+      }
+    }
+  </script>
+  <!-- <script type="module" src="digital-ghost.js"></script> -->
   <script type="module" src="gsap-fx.js"></script>
   <script type="module" src="three-d.js"></script>
   <script src="main.js"></script>

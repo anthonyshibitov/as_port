@@ -22,7 +22,7 @@ canvas {
 header {
   font-size: 1.5rem;
   font-family: "Sono";
-  margin: 2rem;
+  padding: 2rem;
 }
 
 footer {
@@ -50,7 +50,7 @@ pre {
   justify-content: center;
   align-items: center;
   font-size: 3rem;
-  margin: 8rem 2rem 8rem 2rem;
+  margin: 6rem 2rem 6rem 2rem;
 }
 
 .scroll-wrapper {
@@ -77,8 +77,8 @@ pre {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
-  margin-bottom: 10rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .footer-wrapper {
@@ -180,4 +180,49 @@ pre {
   padding: 4rem;
   width: 80%;
   height: 1600px;
+}
+
+.panel-one-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.panel-one-text-center {
+  width: 100vw;
+}
+
+.panel {
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.panel-container {
+  max-height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+
+}
+
+.panel-border {
+  border-left: 1px solid black;
+  height: 60vh;
+  position: absolute;
+  left: 1rem;
+  top: 20vh;
+}
+
+/* shoutout https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/ for this tool */
+@media only screen and (min-width: 600px) {
+  .hero-text {
+    font-size: clamp(3rem, 0.7273rem + 6.0606vw, 10rem);
+  }
+  .hero-wrapper {
+    margin: 8rem 2rem 8rem 2rem;
+  }
+  .panel-one-text-center {
+    width: 70vw;
+  }
 }

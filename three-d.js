@@ -1,6 +1,9 @@
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import * as THREE from "three";
 
 console.log("three loaded!");
+
+const loader = new GLTFLoader();
 
 const clock = new THREE.Clock();
 let time = 0;
