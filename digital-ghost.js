@@ -5,7 +5,7 @@ const alpha = "!@#$%^&*()_+-={}|:\"<>?[]\\;',./`~";
 function printText(string, id, delay){
   const elementId = document.getElementById(id);
   if(!elementId) {
-    console.log("element not found :(");
+    console.log(`element ${id} not found :(`);
     return;
   }
 
@@ -41,21 +41,5 @@ function printText(string, id, delay){
     }, delay * i)
   }
 }
-
-setTimeout(() => {
-  printText("2023 portfolio.", "hero", 100);
-}, 1000);
-
-setTimeout(() => {
-  printText("• frontend design & backend development.", "text", 50);
-}, 3000)
-
-setTimeout(() => {
-  printText("• javascript, three.js, gsap.", "text-2", 50);
-}, 5000)
-
-setTimeout(() => {
-  printText("• postgresql, express, node.", "text-3", 50);
-}, 6500)
 
 export { printText };
