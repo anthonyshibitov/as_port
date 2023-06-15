@@ -7,7 +7,7 @@ function resizeBorders() {
 
   const panels = document.getElementsByClassName("panel");
   Array.from(panels).forEach((panel) => {
-    panel.style.height = window.innerHeight;
+    panel.style.height = window.innerHeight + "px";
   });
 }
 

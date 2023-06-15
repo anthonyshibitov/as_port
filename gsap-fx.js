@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 ScrollTrigger.defaults({
   scroller: ".panel-container",
+  // markers: true
 });
 
 setTimeout(() => {

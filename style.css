@@ -243,14 +243,15 @@ a::after {
   height: 100vh;
   scroll-snap-align: start;
   position: relative;
-  overflow-y: clip;
+  overflow: clip;
+  /* border-top: 1px solid black; */
+  border-bottom: 1px dashed rgb(226, 226, 226);
 }
 
 .panel-container {
-  max-height: 100vh;
+  max-height: 100vh; 
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-
 }
 
 .panel-border {
