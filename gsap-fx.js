@@ -77,9 +77,10 @@ gsap.to("#line3", {
   ease: "sine.inOut",
 });
 
-gsap.from(".about-wrapper", {
+// Panel 2
+gsap.from("#pmp2", {
   scrollTrigger: {
-    trigger: ".about-wrapper",
+    trigger: "#pmp2",
     onEnter: () => {
       setTimeout(() => {
         printText(
@@ -114,19 +115,11 @@ gsap.from(".about-wrapper", {
   },
 });
 
-// gsap.from("#p1-name", {
-//     scrollTrigger: {
-//         trigger: "#p1-name",
-//         once: true,
-//     },
-//     opacity: 0,
-//     duration: 2,
-//     delay: 1,
-// })
 
-gsap.from("#p1-t4", {
+// Panel 3
+gsap.from("#pmp3", {
   scrollTrigger: {
-    trigger: "#p1-t4",
+    trigger: "#pmp3",
     onEnter: () => {
       setTimeout(() => {
         printText(
@@ -161,9 +154,12 @@ gsap.from("#p1-t4", {
   },
 });
 
-gsap.from("header", {
+
+// COUNTERS
+// inc/dec bottom left
+gsap.from("#pmp1", {
   scrollTrigger: {
-    trigger: "header",
+    trigger: "#pmp1",
     onEnter: () => {
       console.log("enter 1");
       document.getElementById("footer-left").innerHTML = "01 / 06";
@@ -175,9 +171,9 @@ gsap.from("header", {
   },
 });
 
-gsap.from("#about-2", {
+gsap.from("#pmp2", {
   scrollTrigger: {
-    trigger: "#about-2",
+    trigger: "#pmp2",
     onEnter: () => {
       console.log("enter 2");
       document.getElementById("footer-left").innerHTML = "02 / 06";
@@ -189,9 +185,9 @@ gsap.from("#about-2", {
   },
 });
 
-gsap.from("#p1-t4", {
+gsap.from("#pmp3", {
   scrollTrigger: {
-    trigger: "#p1-t4",
+    trigger: "#pmp3",
     onEnter: () => {
       console.log("enter 3");
       document.getElementById("footer-left").innerHTML = "03 / 06";
@@ -202,3 +198,17 @@ gsap.from("#p1-t4", {
     },
   },
 });
+
+gsap.from("#pmp4", {
+  scrollTrigger: {
+    trigger: "#pmp4",
+    onEnter: () => {
+      console.log("enter 4");
+      document.getElementById("footer-left").innerHTML = "04 / 06";
+    },
+    onEnterBack: () => {
+      console.log("enter 4");
+      document.getElementById("footer-left").innerHTML = "04 / 06";
+    },
+  },
+})

@@ -9,6 +9,9 @@ function resizeBorders() {
   Array.from(panels).forEach((panel) => {
     panel.style.height = window.innerHeight + "px";
   });
+
+  const panelContainer = document.getElementsByClassName("panel-container");
+  Array.from(panelContainer)[0].style.maxHeight = window.innerHeight + "px";
 }
 
 window.addEventListener("resize", resizeBorders);
