@@ -115,7 +115,6 @@ gsap.from("#pmp2", {
   },
 });
 
-
 // Panel 3
 gsap.from("#pmp3", {
   scrollTrigger: {
@@ -123,28 +122,28 @@ gsap.from("#pmp3", {
     onEnter: () => {
       setTimeout(() => {
         printText(
-          "A site where anonymous users submit messages which are then read and judged by other anonymous users.",
+          "a site where anonymous users submit messages which are then read and judged by other anonymous users.",
           "p1-t1",
           50
         );
       }, 1000);
       setTimeout(() => {
         printText(
-          "Front end: Vanilla HTML, CSS, Greensock Animation Platform.",
+          "front end: Vanilla HTML, CSS, Greensock Animation Platform.",
           "p1-t2",
           50
         );
       }, 1000);
       setTimeout(() => {
         printText(
-          "Back end: Node.js, Express.js, PostgreSQL, EJS Templating.",
+          "back end: Node.js, Express.js, PostgreSQL, EJS Templating.",
           "p1-t3",
           50
         );
       }, 1000);
       setTimeout(() => {
         printText(
-          "Hosted on a Debian VPS using Nginx as a reverse proxy and PM2 process manager for persistance.",
+          "hosted on a Debian VPS using Nginx as a reverse proxy and PM2 process manager for persistance.",
           "p1-t4",
           50
         );
@@ -154,6 +153,39 @@ gsap.from("#pmp3", {
   },
 });
 
+// Panel 4
+gsap.from("#pmp4", {
+  scrollTrigger: {
+    trigger: "#pmp4",
+    onEnter: () => {
+      setTimeout(() => {
+        printText(
+          "activist.org is a network for political action that allows people to coordinate and collaborate on the issues that matter most to them.",
+          "p2-t1",
+          50
+        );
+      }, 1000);
+      setTimeout(() => {
+        printText(
+          "front end: nuxt.js, vue.js, typescript, tailwind css, headless ui.",
+          "p2-t2",
+          50
+        );
+      }, 1000);
+      setTimeout(() => {
+        printText("back end: tentative.", "p2-t3", 50);
+      }, 1000);
+      setTimeout(() => {
+        printText(
+          "contributions: mobile bug fixes, custom vue components for displaying search results, planning backend implementations.",
+          "p2-t4",
+          50
+        );
+      }, 1000);
+    },
+    once: true,
+  },
+});
 
 // COUNTERS
 // inc/dec bottom left
@@ -211,4 +243,4 @@ gsap.from("#pmp4", {
       document.getElementById("footer-left").innerHTML = "04 / 06";
     },
   },
-})
+});

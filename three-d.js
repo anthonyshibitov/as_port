@@ -73,7 +73,7 @@ function animate() {
     camera.lookAt(target.x,target.y,target.z);
 
     if(Math.floor(Math.random()* 1000) == 15){
-        console.log("GYAT");
+        console.log("burst");
         camera_offset = {x: -camera_offset.x, y: -camera_offset.y, z: -camera_offset.z};
     }
 }
