@@ -187,6 +187,44 @@ gsap.from("#pmp4", {
   },
 });
 
+// Panel 5
+gsap.from("#pmp5", {
+  scrollTrigger: {
+    trigger: "#pmp5",
+    onEnter: () => {
+      setTimeout(() => {
+        printText(
+          "graduated from SUNY Fredonia in 2018 with a BS in computer science.",
+          "p3-t1",
+          50
+        );
+      }, 1000);
+      setTimeout(() => {
+        printText(
+          "fingerprint reconstruction - used OpenCV and Python to process images of latent fingerprints on a multitude of surfaces and textures and output reconstructed fingerprints.",
+          "p3-t2",
+          50
+        );
+      }, 1000);
+      setTimeout(() => {
+        printText(
+          "rubik's cube simulation - used freeglut and C++ to render a fully functional and playable Rubik's Cube in OpenGL.",
+          "p3-t3",
+          50
+        );
+      }, 1000);
+      setTimeout(() => {
+        printText(
+          "viola jones face detection- implemented the Viola-Jones Face Detection framework, as specified in the original paper, in OpenCV and Python.",
+          "p3-t4",
+          50
+        );
+      }, 1000);
+    },
+    once: true,
+  },
+});
+
 // COUNTERS
 // inc/dec bottom left
 gsap.from("#pmp1", {
@@ -244,3 +282,31 @@ gsap.from("#pmp4", {
     },
   },
 });
+
+gsap.from("#pmp5", {
+  scrollTrigger: {
+    trigger: "#pmp5",
+    onEnter: () => {
+      console.log("enter 5");
+      document.getElementById("footer-left").innerHTML = "05 / 06";
+    },
+    onEnterBack: () => {
+      console.log("enter 5");
+      document.getElementById("footer-left").innerHTML = "05 / 06";
+    },
+  },
+});
+
+gsap.from("#pmp6", {
+  scrollTrigger: {
+    trigger: "#pmp6",
+    onEnter: () => {
+      console.log("enter 6");
+      document.getElementById("footer-left").innerHTML = "06 / 06";
+    },
+    onEnterBack: () => {
+      console.log("enter 6");
+      document.getElementById("footer-left").innerHTML = "06 / 06";
+    }
+  }
+})
