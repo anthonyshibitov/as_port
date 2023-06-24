@@ -4,6 +4,29 @@ import { printText } from "./digital-ghost";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const rescueButton = document.getElementById("rescue");
+rescueButton.addEventListener("click", () => {
+  console.log("CLICKLY");
+  Array.from(document.getElementsByClassName("panel-container"))[0].style.overflowY = "hidden";
+  Array.from(document.getElementsByClassName("rescue-bg"))[0].style.display = "flex";
+  Array.from(document.getElementsByClassName("rescue-modal-wrapper"))[0].style.display = "flex";
+  document.getElementById("rescue").style.display = "none";
+
+  Array.from(document.getElementsByClassName("rescue-bg"))[0].addEventListener("click", killHeader);
+  document.getElementById("modal-button-2").addEventListener("click", killHeader);
+})
+
+document.getElementsByClassName("rescue-modal-wrapper")[0].addEventListener("click", e => {
+  e.stopPropagation();
+})
+
+const killHeader = () => {
+  Array.from(document.getElementsByClassName("panel-container"))[0].style.overflowY = "scroll";
+  Array.from(document.getElementsByClassName("rescue-bg"))[0].style.display = "none";
+  Array.from(document.getElementsByClassName("rescue-modal-wrapper"))[0].style.display = "none";
+  document.getElementById("rescue").style.display = "flex";
+}
+
 ScrollTrigger.defaults({
   scroller: ".panel-container",
   // markers: true
@@ -24,6 +47,14 @@ setTimeout(() => {
 setTimeout(() => {
   printText("• postgresql, express, node.", "text-3", 50);
 }, 3000);
+
+gsap.to(".rescue-wrapper", {
+  y: -10,
+  duration: 1.5,
+  repeat: -1,
+  yoyo: true,
+  // ease: "power2.inOut",
+})
 
 gsap.from(".js-img", {
   opacity: 0,
@@ -116,6 +147,15 @@ gsap.from("#pmp2", {
 });
 
 // Panel 3
+gsap.from("#p1-name, #p1-name-gh", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#pmp3",
+    once: true,
+  },
+  duration: 1,
+  ease: "power2.inOut"
+})
 gsap.from("#pmp3", {
   scrollTrigger: {
     trigger: "#pmp3",

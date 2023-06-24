@@ -12,6 +12,9 @@ function resizeBorders() {
 
   const panelContainer = document.getElementsByClassName("panel-container");
   Array.from(panelContainer)[0].style.maxHeight = window.innerHeight + "px";
+
+  const rescueBg = document.getElementsByClassName("rescue-bg");
+  Array.from(rescueBg)[0].style.height = window.innerHeight + "px";
 }
 
 window.addEventListener("resize", resizeBorders);
