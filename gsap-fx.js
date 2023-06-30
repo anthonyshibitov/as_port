@@ -62,6 +62,13 @@ gsap.from(".js-img", {
   delay: 3,
 });
 
+gsap.from("#rescue", {
+  opacity: 0,
+  duration: 2,
+  ease: "power2.inOut",
+  delay: 3,
+})
+
 gsap.from("#line1, #line2, #line3, #line4, #line5", {
   width: 0,
   duration: 2,
