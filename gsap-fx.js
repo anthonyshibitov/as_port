@@ -224,7 +224,7 @@ gsap.from("#pmp4", {
       }, 1000);
       setTimeout(() => {
         printText(
-          "contributions: mobile bug fixes, custom vue components for displaying search results, planning backend implementations.",
+          "contributions: mobile bug fixes, custom vue components for displaying search results, planning backend implementations, drafting and designing database schemas.",
           "p2-t4",
           50
         );
