@@ -279,11 +279,11 @@ gsap.from("#pmp1", {
     trigger: "#pmp1",
     onEnter: () => {
       console.log("enter 1");
-      document.getElementById("footer-left").innerHTML = "01 / 06";
+      document.getElementById("footer-left").innerHTML = "01 / 07";
     },
     onEnterBack: () => {
       console.log("enter 1");
-      document.getElementById("footer-left").innerHTML = "01 / 06";
+      document.getElementById("footer-left").innerHTML = "01 / 07";
     },
   },
 });
@@ -293,11 +293,11 @@ gsap.from("#pmp2", {
     trigger: "#pmp2",
     onEnter: () => {
       console.log("enter 2");
-      document.getElementById("footer-left").innerHTML = "02 / 06";
+      document.getElementById("footer-left").innerHTML = "02 / 07";
     },
     onEnterBack: () => {
       console.log("enter 2");
-      document.getElementById("footer-left").innerHTML = "02 / 06";
+      document.getElementById("footer-left").innerHTML = "02 / 07";
     },
   },
 });
@@ -307,11 +307,11 @@ gsap.from("#pmp3", {
     trigger: "#pmp3",
     onEnter: () => {
       console.log("enter 3");
-      document.getElementById("footer-left").innerHTML = "03 / 06";
+      document.getElementById("footer-left").innerHTML = "03 / 07";
     },
     onEnterBack: () => {
       console.log("enter 3");
-      document.getElementById("footer-left").innerHTML = "03 / 06";
+      document.getElementById("footer-left").innerHTML = "03 / 07";
     },
   },
 });
@@ -321,11 +321,11 @@ gsap.from("#pmp4", {
     trigger: "#pmp4",
     onEnter: () => {
       console.log("enter 4");
-      document.getElementById("footer-left").innerHTML = "04 / 06";
+      document.getElementById("footer-left").innerHTML = "04 / 07";
     },
     onEnterBack: () => {
       console.log("enter 4");
-      document.getElementById("footer-left").innerHTML = "04 / 06";
+      document.getElementById("footer-left").innerHTML = "04 / 07";
     },
   },
 });
@@ -335,11 +335,11 @@ gsap.from("#pmp5", {
     trigger: "#pmp5",
     onEnter: () => {
       console.log("enter 5");
-      document.getElementById("footer-left").innerHTML = "05 / 06";
+      document.getElementById("footer-left").innerHTML = "05 / 07";
     },
     onEnterBack: () => {
       console.log("enter 5");
-      document.getElementById("footer-left").innerHTML = "05 / 06";
+      document.getElementById("footer-left").innerHTML = "05 / 07";
     },
   },
 });
@@ -349,11 +349,26 @@ gsap.from("#pmp6", {
     trigger: "#pmp6",
     onEnter: () => {
       console.log("enter 6");
-      document.getElementById("footer-left").innerHTML = "06 / 06";
+      document.getElementById("footer-left").innerHTML = "06 / 07";
     },
     onEnterBack: () => {
       console.log("enter 6");
-      document.getElementById("footer-left").innerHTML = "06 / 06";
+      document.getElementById("footer-left").innerHTML = "06 / 07";
+    }
+  }
+})
+
+
+gsap.from("#pmp7", {
+  scrollTrigger: {
+    trigger: "#pmp7",
+    onEnter: () => {
+      console.log("enter 7");
+      document.getElementById("footer-left").innerHTML = "07 / 07";
+    },
+    onEnterBack: () => {
+      console.log("enter 7");
+      document.getElementById("footer-left").innerHTML = "07 / 07";
     }
   }
 })
