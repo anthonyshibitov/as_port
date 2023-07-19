@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div class="color-pickers">
+      <div class="picker">
+        <input type="color" name="petals" id="petals" value="#FF0000">
+        <label class="stroke" for="petals">Petal</label>
+      </div>
+      <div class="picker">
+        <input type="color" name="center" id="center" value="#FFFF00">
+        <label class="stroke" for="center">Center</label>
+      </div>
+      <div class="picker">
+        <input type="color" name="stem" id="stem" value="#008000">
+        <label class="stroke" for="stem">Stem</label>
+      </div>
+    </div>
+    <div id="canvas"></div>
+    <center class="stroke">sasha</center>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "../build/three.module.js",
+        "three/addons/": "./jsm/"
+      }
+    }
+    </script>
+    <script defer type="module" src="./main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.10.1/tsparticles.confetti.bundle.min.js"></script>
+  </body>
+</html>

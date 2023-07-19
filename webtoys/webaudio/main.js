@@ -65,6 +65,7 @@ const bodyElement = document.getElementsByTagName('body');
 
 bodyElement[0].addEventListener('click', () => {
   beginPlaying();
+  document.getElementById("begin").style.display = "none";
 });
 
 audioElement.load();
