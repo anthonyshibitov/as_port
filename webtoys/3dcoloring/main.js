@@ -100,7 +100,7 @@ const stemColor = new THREE.MeshBasicMaterial({
   color: new THREE.Color("green"),
 });
 
-loader.load("flower.glb", function (gltf) {
+loader.load("./flower.glb", function (gltf) {
   console.log("loaded");
 
   let stemMesh = gltf.scene.children[0].geometry;
