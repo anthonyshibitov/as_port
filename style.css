@@ -101,8 +101,9 @@ a::after {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  /* padding-top: 5rem;
+  padding-bottom: 5rem; */
+  padding: 3rem 2rem;
 }
 
 .project-wrapper {
@@ -110,7 +111,7 @@ a::after {
   flex-direction: column;
   justify-content: center;
   /* align-items: center; */
-  padding: 3rem;
+  padding: 3rem 2rem;
 }
 
 .footer-wrapper {
@@ -367,6 +368,12 @@ a::after {
 
 /* shoutout https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/ for this tool */
 @media only screen and (min-width: 600px) {
+  .project-wrapper {
+    padding: 3rem;
+  }
+  .about-wrapper {
+    padding: 5rem 3rem;
+  }
   .modal-header {
     font-size: 1.5rem;
   }

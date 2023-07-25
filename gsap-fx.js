@@ -7,25 +7,42 @@ gsap.registerPlugin(ScrollTrigger);
 const rescueButton = document.getElementById("rescue");
 rescueButton.addEventListener("click", () => {
   console.log("CLICKLY");
-  Array.from(document.getElementsByClassName("panel-container"))[0].style.overflowY = "hidden";
-  Array.from(document.getElementsByClassName("rescue-bg"))[0].style.display = "flex";
-  Array.from(document.getElementsByClassName("rescue-modal-wrapper"))[0].style.display = "flex";
+  Array.from(
+    document.getElementsByClassName("panel-container")
+  )[0].style.overflowY = "hidden";
+  Array.from(document.getElementsByClassName("rescue-bg"))[0].style.display =
+    "flex";
+  Array.from(
+    document.getElementsByClassName("rescue-modal-wrapper")
+  )[0].style.display = "flex";
   document.getElementById("rescue").style.display = "none";
 
-  Array.from(document.getElementsByClassName("rescue-bg"))[0].addEventListener("click", killHeader);
-  document.getElementById("modal-button-2").addEventListener("click", killHeader);
-})
+  Array.from(document.getElementsByClassName("rescue-bg"))[0].addEventListener(
+    "click",
+    killHeader
+  );
+  document
+    .getElementById("modal-button-2")
+    .addEventListener("click", killHeader);
+});
 
-document.getElementsByClassName("rescue-modal-wrapper")[0].addEventListener("click", e => {
-  e.stopPropagation();
-})
+document
+  .getElementsByClassName("rescue-modal-wrapper")[0]
+  .addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
 
 const killHeader = () => {
-  Array.from(document.getElementsByClassName("panel-container"))[0].style.overflowY = "scroll";
-  Array.from(document.getElementsByClassName("rescue-bg"))[0].style.display = "none";
-  Array.from(document.getElementsByClassName("rescue-modal-wrapper"))[0].style.display = "none";
+  Array.from(
+    document.getElementsByClassName("panel-container")
+  )[0].style.overflowY = "scroll";
+  Array.from(document.getElementsByClassName("rescue-bg"))[0].style.display =
+    "none";
+  Array.from(
+    document.getElementsByClassName("rescue-modal-wrapper")
+  )[0].style.display = "none";
   document.getElementById("rescue").style.display = "flex";
-}
+};
 
 ScrollTrigger.defaults({
   scroller: ".panel-container",
@@ -54,7 +71,7 @@ gsap.to(".rescue-wrapper", {
   repeat: -1,
   yoyo: true,
   // ease: "power2.inOut",
-})
+});
 
 gsap.from(".js-img", {
   opacity: 0,
@@ -67,7 +84,7 @@ gsap.from("#rescue", {
   duration: 2,
   ease: "power2.inOut",
   delay: 3,
-})
+});
 
 gsap.from("#line1, #line2, #line3, #line4, #line5", {
   width: 0,
@@ -161,8 +178,8 @@ gsap.from("#p1-name, #p1-name-gh", {
     once: true,
   },
   duration: 1,
-  ease: "power2.inOut"
-})
+  ease: "power2.inOut",
+});
 gsap.from("#pmp3", {
   scrollTrigger: {
     trigger: "#pmp3",
@@ -201,6 +218,15 @@ gsap.from("#pmp3", {
 });
 
 // Panel 4
+gsap.from("#p2-name, #p2-name-gh", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#pmp4",
+    once: true,
+  },
+  duration: 1,
+  ease: "power2.inOut",
+});
 gsap.from("#pmp4", {
   scrollTrigger: {
     trigger: "#pmp4",
@@ -214,13 +240,13 @@ gsap.from("#pmp4", {
       }, 1000);
       setTimeout(() => {
         printText(
-          "front end: nuxt.js, vue.js, typescript, tailwind css, headless ui.",
+          "front end: Nuxt.js, Vue.js, Typescript, Tailwind CSS, Headless UI.",
           "p2-t2",
           50
         );
       }, 1000);
       setTimeout(() => {
-        printText("back end: tentative.", "p2-t3", 50);
+        printText("back end: Django, PostgreSQL.", "p2-t3", 50);
       }, 1000);
       setTimeout(() => {
         printText(
@@ -235,6 +261,15 @@ gsap.from("#pmp4", {
 });
 
 // Panel 5
+gsap.from("#p3-name, #p3-name-2", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#pmp5",
+    once: true,
+  },
+  duration: 1,
+  ease: "power2.inOut",
+});
 gsap.from("#pmp5", {
   scrollTrigger: {
     trigger: "#pmp5",
@@ -266,6 +301,39 @@ gsap.from("#pmp5", {
           "p3-t4",
           50
         );
+      }, 1000);
+    },
+    once: true,
+  },
+});
+
+// Panel 6
+
+gsap.from("#p4-name, #p4-name-2, #p4-name-3", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#pmp6",
+    once: true,
+  },
+  duration: 1,
+  ease: "power2.inOut",
+});
+gsap.from("#pmp6", {
+  scrollTrigger: {
+    trigger: "#pmp6",
+    onEnter: () => {
+      setTimeout(() => {
+        printText(
+          "this is a collection of random experiments and tests for various topics that interest me!",
+          "p4-t1",
+          50
+        );
+      }, 1000);
+      setTimeout(() => {
+        printText("a realtime audio visualizer using webaudio API and canvas.", "p4-t2", 50);
+      }, 1000);
+      setTimeout(() => {
+        printText("a 3D coloring app using three.js. therapeutic!", "p4-t3", 50);
       }, 1000);
     },
     once: true,
@@ -354,10 +422,9 @@ gsap.from("#pmp6", {
     onEnterBack: () => {
       console.log("enter 6");
       document.getElementById("footer-left").innerHTML = "06 / 07";
-    }
-  }
-})
-
+    },
+  },
+});
 
 gsap.from("#pmp7", {
   scrollTrigger: {
@@ -369,6 +436,6 @@ gsap.from("#pmp7", {
     onEnterBack: () => {
       console.log("enter 7");
       document.getElementById("footer-left").innerHTML = "07 / 07";
-    }
-  }
-})
+    },
+  },
+});
