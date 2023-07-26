@@ -308,7 +308,6 @@ gsap.from("#pmp5", {
 });
 
 // Panel 6
-
 gsap.from("#p4-name, #p4-name-2, #p4-name-3", {
   opacity: 0,
   scrollTrigger: {
@@ -339,6 +338,32 @@ gsap.from("#pmp6", {
     once: true,
   },
 });
+
+// Panel 7
+gsap.from("#contact-3, #contact-4", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#pmp7",
+    once: true,
+  },
+  delay: 3,
+  duration: 2,
+  ease: "power2.inOut",
+})
+gsap.from("#pmp7", {
+  scrollTrigger: {
+    trigger: "#pmp7",
+    onEnter: () => {
+      setTimeout(() => {
+        printText("like what you see? have a question? wanna make something cool together?", "contact-1", 50);
+      }, 1000);
+      setTimeout(() => {
+        printText("let's get in touch.", "contact-2", 50);
+      }, 1000);
+    },
+    once: true,
+  }
+})
 
 // COUNTERS
 // inc/dec bottom left
