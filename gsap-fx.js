@@ -58,7 +58,7 @@ setTimeout(() => {
 }, 3000);
 
 setTimeout(() => {
-  printText("• javascript, three.js, gsap.", "text-2", 50);
+  printText("• javascript, react, vue.", "text-2", 50);
 }, 3000);
 
 setTimeout(() => {
@@ -217,6 +217,34 @@ gsap.from("#pmp3", {
   },
 });
 
+// Panel ja
+gsap.from("#ja-name, #ja-name-gh", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#pmp-ja",
+    once: true,
+  },
+  duration: 1,
+  ease: "power2.inOut",
+});
+gsap.from("#pmp-ja", {
+  scrollTrigger: {
+    trigger: "#pmp-ja",
+    onEnter: () => {
+      setTimeout(() => {
+        printText("an online Portable Executable reversing tool, for 32 and 64-bit files.", "ja-t1", 50);
+      }, 1000);
+      setTimeout(() => {
+        printText("built entirely in javascript, executed client-side.", "ja-t2", 50);
+      }, 1000);
+      setTimeout(() => {
+        printText("supports imports, exports, PE header parsing, sections headers, relocations, and more. provides information to quickly triage samples.", "ja-t3", 50);
+      }, 1000);
+    },
+    once: true,
+  }
+});
+
 // Panel 4
 gsap.from("#p2-name, #p2-name-gh", {
   opacity: 0,
@@ -329,10 +357,18 @@ gsap.from("#pmp6", {
         );
       }, 1000);
       setTimeout(() => {
-        printText("a realtime audio visualizer using webaudio API and canvas.", "p4-t2", 50);
+        printText(
+          "a realtime audio visualizer using webaudio API and canvas.",
+          "p4-t2",
+          50
+        );
       }, 1000);
       setTimeout(() => {
-        printText("a 3D coloring app using three.js. therapeutic!", "p4-t3", 50);
+        printText(
+          "a 3D coloring app using three.js. therapeutic!",
+          "p4-t3",
+          50
+        );
       }, 1000);
     },
     once: true,
@@ -349,21 +385,25 @@ gsap.from("#contact-3, #contact-4", {
   delay: 3,
   duration: 2,
   ease: "power2.inOut",
-})
+});
 gsap.from("#pmp7", {
   scrollTrigger: {
     trigger: "#pmp7",
     onEnter: () => {
       setTimeout(() => {
-        printText("like what you see? have a question? wanna make something cool together?", "contact-1", 50);
+        printText(
+          "like what you see? have a question? wanna make something cool together?",
+          "contact-1",
+          50
+        );
       }, 1000);
       setTimeout(() => {
         printText("let's get in touch.", "contact-2", 50);
       }, 1000);
     },
     once: true,
-  }
-})
+  },
+});
 
 // COUNTERS
 // inc/dec bottom left
@@ -372,11 +412,11 @@ gsap.from("#pmp1", {
     trigger: "#pmp1",
     onEnter: () => {
       console.log("enter 1");
-      document.getElementById("footer-left").innerHTML = "01 / 07";
+      document.getElementById("footer-left").innerHTML = "01 / 08";
     },
     onEnterBack: () => {
       console.log("enter 1");
-      document.getElementById("footer-left").innerHTML = "01 / 07";
+      document.getElementById("footer-left").innerHTML = "01 / 08";
     },
   },
 });
@@ -386,11 +426,11 @@ gsap.from("#pmp2", {
     trigger: "#pmp2",
     onEnter: () => {
       console.log("enter 2");
-      document.getElementById("footer-left").innerHTML = "02 / 07";
+      document.getElementById("footer-left").innerHTML = "02 / 08";
     },
     onEnterBack: () => {
       console.log("enter 2");
-      document.getElementById("footer-left").innerHTML = "02 / 07";
+      document.getElementById("footer-left").innerHTML = "02 / 08";
     },
   },
 });
@@ -400,11 +440,25 @@ gsap.from("#pmp3", {
     trigger: "#pmp3",
     onEnter: () => {
       console.log("enter 3");
-      document.getElementById("footer-left").innerHTML = "03 / 07";
+      document.getElementById("footer-left").innerHTML = "03 / 08";
     },
     onEnterBack: () => {
       console.log("enter 3");
-      document.getElementById("footer-left").innerHTML = "03 / 07";
+      document.getElementById("footer-left").innerHTML = "03 / 08";
+    },
+  },
+});
+
+gsap.from("#pmp-ja", {
+  scrollTrigger: {
+    trigger: "#pmp-ja",
+    onEnter: () => {
+      console.log("enter ja");
+      document.getElementById("footer-left").innerHTML = "04 / 08";
+    },
+    onEnterBack: () => {
+      console.log("enter ja");
+      document.getElementById("footer-left").innerHTML = "04 / 08";
     },
   },
 });
@@ -414,11 +468,11 @@ gsap.from("#pmp4", {
     trigger: "#pmp4",
     onEnter: () => {
       console.log("enter 4");
-      document.getElementById("footer-left").innerHTML = "04 / 07";
+      document.getElementById("footer-left").innerHTML = "05 / 08";
     },
     onEnterBack: () => {
       console.log("enter 4");
-      document.getElementById("footer-left").innerHTML = "04 / 07";
+      document.getElementById("footer-left").innerHTML = "05 / 08";
     },
   },
 });
@@ -428,11 +482,11 @@ gsap.from("#pmp5", {
     trigger: "#pmp5",
     onEnter: () => {
       console.log("enter 5");
-      document.getElementById("footer-left").innerHTML = "05 / 07";
+      document.getElementById("footer-left").innerHTML = "06 / 08";
     },
     onEnterBack: () => {
       console.log("enter 5");
-      document.getElementById("footer-left").innerHTML = "05 / 07";
+      document.getElementById("footer-left").innerHTML = "06 / 08";
     },
   },
 });
@@ -442,11 +496,11 @@ gsap.from("#pmp6", {
     trigger: "#pmp6",
     onEnter: () => {
       console.log("enter 6");
-      document.getElementById("footer-left").innerHTML = "06 / 07";
+      document.getElementById("footer-left").innerHTML = "07 / 08";
     },
     onEnterBack: () => {
       console.log("enter 6");
-      document.getElementById("footer-left").innerHTML = "06 / 07";
+      document.getElementById("footer-left").innerHTML = "07 / 08";
     },
   },
 });
@@ -456,11 +510,11 @@ gsap.from("#pmp7", {
     trigger: "#pmp7",
     onEnter: () => {
       console.log("enter 7");
-      document.getElementById("footer-left").innerHTML = "07 / 07";
+      document.getElementById("footer-left").innerHTML = "08 / 08";
     },
     onEnterBack: () => {
       console.log("enter 7");
-      document.getElementById("footer-left").innerHTML = "07 / 07";
+      document.getElementById("footer-left").innerHTML = "08 / 08";
     },
   },
 });
