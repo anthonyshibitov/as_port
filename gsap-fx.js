@@ -50,7 +50,7 @@ ScrollTrigger.defaults({
 });
 
 setTimeout(() => {
-  printText("2023 portfolio.", "hero", 100);
+  printText("2024 portfolio.", "hero", 100);
 }, 1000);
 
 setTimeout(() => {
