@@ -9,6 +9,7 @@ export default defineConfig({
         // webtoys: resolve(__dirname, 'webtoys/'),
         webaudio: resolve(__dirname, 'webtoys/webaudio/index.html'),
         "3dcoloring": resolve(__dirname, 'webtoys/3dcoloring/index.html'),
+        laurel: resolve(__dirname, 'laurel/index.html')
       },
     },
   },
