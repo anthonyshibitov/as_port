@@ -20,10 +20,12 @@ function Laurel() {
         ['December', 12]
     ];
 
+    const currentYear = new Date().getFullYear();
+
     const [kids, setKids] = useState([]);
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
-    const [year, setYear] = useState(2024);
+    const [year, setYear] = useState(currentYear);
     const [id, setId] = useState(0);
 
     const addKid = () => {
@@ -180,7 +182,7 @@ function Laurel() {
                 <h2>Instructions</h2>
                 <p>This application will generate a yearly grouping of infants, waddlers, and toddlers by month. The grouping of each child will change depending on their age and birth date.</p>
                 <p>Add a name and birthday (in MM/DD/YYYY format) at the top, and click 'Add' to add them to the calendar. Children can be removed from the calendar by clicking the red X after their name in the list below the calendar.</p>
-                <p>The calendar will default to the year 2024, but this can be changed to see past and future groupings by changing the year value in the 'Generate for year' input.</p>
+                <p>The calendar will default to the current year, {currentYear}, but this can be changed to see past and future groupings by changing the year value in the 'Generate for year' input.</p>
                 <p>Once you've added all the children, you can press Control + P at the same time to open the print dialog, and print the calendar.</p>
                 <p>NOTE: Data is stored *locally*. So if you use the same computer, the same kids entered will be saved between sessions. If you use a different computer though, your entries will not be saved.</p>
                 <p>💘</p>
