@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
 // Clear the existing HTML content
@@ -35,6 +35,30 @@ function Laurel() {
             setDate("");
         }
     };
+
+    // Load kids from localStorage on initial render
+    useEffect(() => {
+        const storedKids = JSON.parse(localStorage.getItem('kids'));
+        if (storedKids) {
+            // Convert stored date strings back into Date objects
+            const loadedKids = storedKids.map(kid => ({
+                ...kid,
+                date: new Date(kid.date) // Convert string back to Date object
+            }));
+            setKids(loadedKids);
+            setId(loadedKids.length > 0 ? loadedKids[loadedKids.length - 1].id + 1 : 0); // Set next id
+        }
+    }, []);
+
+    // Save kids to localStorage whenever it changes
+    useEffect(() => {
+        // Convert Date objects to strings before saving
+        const kidsToSave = kids.map(kid => ({
+            ...kid,
+            date: kid.date.toISOString() // Convert Date object to string
+        }));
+        localStorage.setItem('kids', JSON.stringify(kidsToSave));
+    }, [kids]);
 
     const removeKid = (id) => {
         setKids(kids.filter(kid => kid.id !== id));
@@ -151,6 +175,13 @@ function Laurel() {
                         <button type="button" className="remove-btn" onClick={() => removeKid(kid.id)}>X</button>
                     </div>
                 ))}
+            </div>
+            <div>
+                <h2>Instructions</h2>
+                <p>This application will generate a yearly grouping of infants, waddlers, and toddlers by month. The grouping of each child will change depending on their age</p>
+                <p>Add a name and birthday (in MM/DD/YYYY format) at the top, and click 'Add' to add them to the calendar. Children can be removed from the calendar by clicking the red X after their name in the list below the calendar.</p>
+                <p>The calendar will default to the year 2024, but this can be changed to see past and future groupings by changing the year value in the 'Generate for year' input.</p>
+                <p>Once you've added all the children, you can press Control + P at the same time to open the print dialog, and print the calendar.</p>
             </div>
         </div>
     );
