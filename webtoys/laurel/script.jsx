@@ -82,7 +82,30 @@ function Laurel() {
     return (
         <div className="container">
             <div className="top-container">
-                <div className="laurel">Laurel's Class Calculator</div>
+                    <div className="title">
+                        <span className="soft-red">L</span>
+                        <span className="soft-orange">a</span>
+                        <span className="soft-green">u</span>
+                        <span className="soft-blue">r</span>
+                        <span className="soft-indigo">e</span>
+                        <span className="soft-violet">l</span>
+                        <span className="soft-red">'s</span> &nbsp;
+                        <span className="soft-orange">C</span>
+                        <span className="soft-green">l</span>
+                        <span className="soft-blue">a</span>
+                        <span className="soft-indigo">s</span>
+                        <span className="soft-violet">s</span> &nbsp;
+                        <span className="soft-red">C</span>
+                        <span className="soft-orange">a</span>
+                        <span className="soft-green">l</span>
+                        <span className="soft-blue">c</span>
+                        <span className="soft-indigo">u</span>
+                        <span className="soft-violet">l</span>
+                        <span className="soft-red">a</span>
+                        <span className="soft-orange">t</span>
+                        <span className="soft-green">o</span>
+                        <span className="soft-blue">r</span>
+                    </div>
                 <div>Made with love by Anthony</div>
             </div>
             <div className="input">

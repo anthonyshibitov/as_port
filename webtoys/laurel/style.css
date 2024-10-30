@@ -1,4 +1,4 @@
-* {
+body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -95,11 +95,6 @@ td:empty {
     align-items: center;
 }
 
-.laurel {
-    font-weight: bold;
-    font-size: large;
-}
-
 .kid-item {
     display: flex;
     align-items: center;
@@ -141,3 +136,18 @@ td:empty {
 .remove-btn:hover {
     background-color: darkred;
 }
+
+.title {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+    font-size: 2em; /* Slightly larger font */
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Rainbow colors for title letters (darker shades) */
+.soft-red { color: #C75B5B; }      /* Darker red */
+.soft-orange { color: #D68F5B; }   /* Darker orange */
+.soft-green { color: #5BBF8D; }    /* Darker green */
+.soft-blue { color: #4B8CC6; }     /* Darker blue */
+.soft-indigo { color: #5D6FBB; }   /* Darker indigo */
+.soft-violet { color: #9B6BC4; }   /* Darker violet */
