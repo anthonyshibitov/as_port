@@ -132,7 +132,6 @@ function Laurel() {
                         <span className="soft-green">o</span>
                         <span className="soft-blue">r</span>
                     </div>
-                <div>Made with love by Anthony</div>
             </div>
             <div className="input">
                 <div className="controls">
