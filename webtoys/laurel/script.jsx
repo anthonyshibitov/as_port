@@ -25,39 +25,66 @@ function Laurel() {
     const [kids, setKids] = useState([]);
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
+    const [infantDate, setInfantDate] = useState("");
+    const [waddlerDate, setWaddlerDate] = useState("");
+    const [toddlerDate, setToddlerDate] = useState("");
     const [year, setYear] = useState(currentYear);
     const [id, setId] = useState(0);
 
     const addKid = () => {
-        const kidDate = new Date(date);
+        // Replace dashes with slashes to avoid any interpretation issues
+        const formattedDate = date.replace(/-/g, '/');
+        const kidDate = new Date(formattedDate); // Create a new Date using the formatted string
+    
+        const formattedInfantDate = infantDate ? infantDate.replace(/-/g, '/') : null;
+        const kidInfantGradDate = formattedInfantDate ? new Date(formattedInfantDate) : null;
+    
+        const formattedWaddlerDate = waddlerDate ? waddlerDate.replace(/-/g, '/') : null;
+        const kidWaddlerGradDate = formattedWaddlerDate ? new Date(formattedWaddlerDate) : null;
+    
+        const formattedToddlerDate = toddlerDate ? toddlerDate.replace(/-/g, '/') : null;
+        const kidToddlerGradDate = formattedToddlerDate ? new Date(formattedToddlerDate) : null;
+    
         if (name && date) {
-            setKids([...kids, { id, name, date: kidDate }]);
+            setKids([...kids, {
+                id,
+                name,
+                date: kidDate,
+                infantGradDate: kidInfantGradDate,
+                waddlerGradDate: kidWaddlerGradDate,
+                toddlerGradDate: kidToddlerGradDate
+            }]);
             setId(id + 1);
             setName("");
             setDate("");
+            setInfantDate("");
+            setWaddlerDate("");
+            setToddlerDate("");
         }
     };
 
-    // Load kids from localStorage on initial render
     useEffect(() => {
         const storedKids = JSON.parse(localStorage.getItem('kids'));
         if (storedKids) {
-            // Convert stored date strings back into Date objects
             const loadedKids = storedKids.map(kid => ({
                 ...kid,
-                date: new Date(kid.date) // Convert string back to Date object
+                date: new Date(kid.date),
+                infantGradDate: kid.infantGradDate ? new Date(kid.infantGradDate) : null,
+                waddlerGradDate: kid.waddlerGradDate ? new Date(kid.waddlerGradDate) : null,
+                toddlerGradDate: kid.toddlerGradDate ? new Date(kid.toddlerGradDate) : null
             }));
             setKids(loadedKids);
             setId(loadedKids.length > 0 ? loadedKids[loadedKids.length - 1].id + 1 : 0); // Set next id
         }
     }, []);
 
-    // Save kids to localStorage whenever it changes
     useEffect(() => {
-        // Convert Date objects to strings before saving
         const kidsToSave = kids.map(kid => ({
             ...kid,
-            date: kid.date.toISOString() // Convert Date object to string
+            date: kid.date.toISOString(),
+            infantGradDate: kid.infantGradDate ? kid.infantGradDate.toISOString() : null,
+            waddlerGradDate: kid.waddlerGradDate ? kid.waddlerGradDate.toISOString() : null,
+            toddlerGradDate: kid.toddlerGradDate ? kid.toddlerGradDate.toISOString() : null
         }));
         localStorage.setItem('kids', JSON.stringify(kidsToSave));
     }, [kids]);
@@ -71,8 +98,26 @@ function Laurel() {
     };
 
     const handleDate = (e) => {
-        setDate(e.target.value);
+        const newDate = e.target.value;
+        setDate(newDate);
+
+        const formattedDate = new Date(newDate);
+        setInfantDate(new Date(formattedDate.setFullYear(formattedDate.getFullYear() + 1)).toISOString().split('T')[0]);
+        setWaddlerDate(new Date(formattedDate.setFullYear(formattedDate.getFullYear() + 1)).toISOString().split('T')[0]);
+        setToddlerDate(new Date(formattedDate.setFullYear(formattedDate.getFullYear() + 1)).toISOString().split('T')[0]);
     };
+
+    const handleInfantDate = (e) => {
+        setInfantDate(e.target.value);
+    }
+
+    const handleWaddlerDate = (e) => {
+        setWaddlerDate(e.target.value);
+    }
+
+    const handleToddlerDate = (e) => {
+        setToddlerDate(e.target.value);
+    }
 
     const handleYear = (e) => {
         setYear(e.target.value);
@@ -84,18 +129,33 @@ function Laurel() {
             let infants = [];
             let waddlers = [];
             let toddlers = [];
-
+    
             kids.forEach(kid => {
-                const daysDifference = Math.floor((currentDate - kid.date) / (1000 * 60 * 60 * 24));
-                if (daysDifference < 365 && daysDifference > 0) {
-                    infants.push(kid.name);
-                } else if (daysDifference >= 365 && daysDifference < 730) {
-                    waddlers.push(kid.name);
-                } else if (daysDifference >= 730) {
-                    toddlers.push(kid.name);
+                let isInfant = false;
+                let isWaddler = false;
+                let isToddler = false;
+                const daysSinceBirth = Math.floor((currentDate - kid.date) / (1000 * 60 * 60 * 24));
+                if(currentDate < kid.infantGradDate && daysSinceBirth >= 0){
+                    isInfant = true;
+                } else if (currentDate >= kid.infantGradDate && currentDate < kid.waddlerGradDate){
+                    isWaddler = true;
+                } else if (currentDate >= kid.waddlerGradDate && currentDate < kid.toddlerGradDate){
+                    isToddler = true;
                 }
-            });
 
+                console.log(month);
+                console.log(currentDate);
+                console.log(kid);
+                console.log(`infant ${isInfant}`);
+                console.log(`waddler ${isWaddler}`);
+                console.log(`toddler ${isToddler}`);
+                console.log(`we are checking if ${currentDate} >= ${kid.toddlerGradDate}`)
+                console.log(`days since birth ${daysSinceBirth}`);
+                if (isInfant) infants.push(kid.name);
+                else if (isWaddler) waddlers.push(kid.name);
+                else if (isToddler) toddlers.push(kid.name);
+            });
+    
             return {
                 month: month[0],
                 infants: { count: infants.length, names: infants.join(', ') },
@@ -136,7 +196,22 @@ function Laurel() {
             <div className="input">
                 <div className="controls">
                     <input type="text" name="kid" id="kid" placeholder="Name" value={name} onChange={handleName} />
-                    <input type="date" name="bday" id="bday" value={date} onChange={handleDate} />
+                    <div className="vert">
+                        <div>Birth date</div>
+                        <input type="date" name="bday" id="bday" value={date} onChange={handleDate} />
+                    </div>
+                    <div className="vert">
+                        <div>Infant grad date</div>
+                        <input type="date" name="iday" id="iday" value={infantDate} onChange={handleInfantDate} />
+                    </div>
+                    <div className="vert">
+                        <div>Waddler grad date</div>
+                        <input type="date" name="wday" id="wday" value={waddlerDate} onChange={handleWaddlerDate} />
+                    </div>
+                    <div className="vert">
+                        <div>Toddler grad date</div>
+                        <input type="date" name="tday" id="tday" value={toddlerDate} onChange={handleToddlerDate} />
+                    </div>
                     <button type="button" onClick={addKid}>Add</button>
                     <label htmlFor="date">Generate for year:</label>
                     <input id="date" type="number" min="1900" max="2099" step="1" value={year} onChange={handleYear} />
@@ -172,7 +247,10 @@ function Laurel() {
                 {kids.map((kid) => (
                     <div key={kid.id} className="kid-item">
                         <span className="kid-name">{kid.name}</span>
-                        <span className="kid-date">{kid.date.toDateString()}</span>
+                        <span className="kid-date">Birth date: {kid.date.toDateString()}</span>
+                        <span className="kid-date">Infant grad date: {kid.infantGradDate.toDateString()}</span>
+                        <span className="kid-date">Waddler grad date: {kid.waddlerGradDate.toDateString()}</span>
+                        <span className="kid-date">Toddler grad date: {kid.toddlerGradDate.toDateString()}</span>
                         <button type="button" className="remove-btn" onClick={() => removeKid(kid.id)}>X</button>
                     </div>
                 ))}

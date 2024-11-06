@@ -78,6 +78,7 @@ td:empty {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
+    align-items: center;
 }
 
 .container {
@@ -151,3 +152,8 @@ td:empty {
 .soft-blue { color: #4B8CC6; }     /* Darker blue */
 .soft-indigo { color: #5D6FBB; }   /* Darker indigo */
 .soft-violet { color: #9B6BC4; }   /* Darker violet */
+
+.vert {
+    display: flex;
+    flex-direction: column;
+}
