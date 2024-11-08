@@ -4,7 +4,87 @@ import { createRoot } from 'react-dom/client';
 // Clear the existing HTML content
 document.body.innerHTML = '<div id="app"></div>';
 
-function Laurel() {
+const formatDate = (date) => {
+    const month = date.getMonth() + 1; // getMonth() returns 0-11, so add 1
+    const day = date.getDate();
+    const year = date.getFullYear();
+    
+    return `${month}/${day}/${year}`;
+};
+
+function EditModal({ kid, editFunction, close }) {
+    function formatDateToInput(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // months are zero-indexed
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    console.log(kid);
+    const [date, setDate] = useState(formatDateToInput(kid.date));
+    const [infantDate, setInfantDate] = useState(formatDateToInput(kid.infantGradDate));
+    const [waddlerDate, setWaddlerDate] = useState(formatDateToInput(kid.waddlerGradDate));
+    const [toddlerDate, setToddlerDate] = useState(formatDateToInput(kid.toddlerGradDate));
+    const handleDate = (date) => {
+        setDate(date);
+    }
+    const handleInfantDate = (date) => {
+        setInfantDate(date);
+    }
+    const handleWaddlerDate = (date) => {
+        setWaddlerDate(date);
+    }
+    const handleToddlerDate = (date) => {
+        setToddlerDate(date);
+    }
+
+    const saveAllInfo = () => {
+        editFunction(kid.id, 'date', date.replace(/-/g, '/'));
+        editFunction(kid.id, 'infantGradDate', infantDate.replace(/-/g, '/'));
+        editFunction(kid.id, 'waddlerGradDate', waddlerDate.replace(/-/g, '/'));
+        editFunction(kid.id, 'toddlerGradDate', toddlerDate.replace(/-/g, '/'));
+    }
+
+    const exitModal = () => {
+        close();
+    }
+
+    return (
+        <div className="modal">
+            <div className="modal-container">
+                <div className="modal-controls">
+                    <div className="modal-title">
+                        Edit entry
+                    </div>
+                    <div className='modal-line'>
+                        <span>Name:</span>
+                        <span>{kid.name}</span>
+                    </div>
+                    <div className='modal-line'>
+                        <span>Bday:</span>
+                        <span><input type="date" onChange={(e) => {handleDate(e.target.value)}} value={date} /></span>
+                    </div>
+                    <div className='modal-line'>
+                        <span>Infant:</span>
+                        <span><input type="date" onChange={(e) => {handleInfantDate(e.target.value)}} value={infantDate} /></span>
+                    </div>
+                    <div className='modal-line'>
+                        <span>Waddler:</span>
+                        <span><input type="date" onChange={(e) => {handleWaddlerDate(e.target.value)}} value={waddlerDate} /></span>
+                    </div>
+                    <div className='modal-line'>
+                        <span>Toddler:</span>
+                        <span><input type="date" onChange={(e) => {handleToddlerDate(e.target.value)}} value={toddlerDate} /></span>
+                    </div>
+                    <button onClick={() => saveAllInfo()}>Save</button>
+                    <button onClick={() => exitModal()}>Exit</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ClassCalc() {
     const months = [
         ['January', 1],
         ['February', 2],
@@ -30,6 +110,7 @@ function Laurel() {
     const [toddlerDate, setToddlerDate] = useState("");
     const [year, setYear] = useState(currentYear);
     const [id, setId] = useState(0);
+    const [editingKid, setEditingKid] = useState();
 
     const addKid = () => {
         // Replace dashes with slashes to avoid any interpretation issues
@@ -89,6 +170,21 @@ function Laurel() {
         localStorage.setItem('kids', JSON.stringify(kidsToSave));
     }, [kids]);
 
+    const editKid = (id, key, value) => {
+        setKids(prevKids => prevKids.map(kid => 
+            kid.id === id ? { ...kid, [key]: new Date(value) } : kid
+        ));
+        setEditingKid(null);
+    };
+
+    const closeModal = () => {
+        setEditingKid(null);
+    }
+    
+    const handleEdit = (kid) => {
+        setEditingKid(kid);
+    };
+
     const removeKid = (id) => {
         setKids(kids.filter(kid => kid.id !== id));
     };
@@ -142,15 +238,6 @@ function Laurel() {
                 } else if (currentDate >= kid.waddlerGradDate && currentDate < kid.toddlerGradDate){
                     isToddler = true;
                 }
-
-                console.log(month);
-                console.log(currentDate);
-                console.log(kid);
-                console.log(`infant ${isInfant}`);
-                console.log(`waddler ${isWaddler}`);
-                console.log(`toddler ${isToddler}`);
-                console.log(`we are checking if ${currentDate} >= ${kid.toddlerGradDate}`)
-                console.log(`days since birth ${daysSinceBirth}`);
                 if (isInfant) infants.push(kid.name);
                 else if (isWaddler) waddlers.push(kid.name);
                 else if (isToddler) toddlers.push(kid.name);
@@ -169,28 +256,7 @@ function Laurel() {
         <div className="container">
             <div className="top-container">
                     <div className="title">
-                        <span className="soft-red">L</span>
-                        <span className="soft-orange">a</span>
-                        <span className="soft-green">u</span>
-                        <span className="soft-blue">r</span>
-                        <span className="soft-indigo">e</span>
-                        <span className="soft-violet">l</span>
-                        <span className="soft-red">'s</span> &nbsp;
-                        <span className="soft-orange">C</span>
-                        <span className="soft-green">l</span>
-                        <span className="soft-blue">a</span>
-                        <span className="soft-indigo">s</span>
-                        <span className="soft-violet">s</span> &nbsp;
-                        <span className="soft-red">C</span>
-                        <span className="soft-orange">a</span>
-                        <span className="soft-green">l</span>
-                        <span className="soft-blue">c</span>
-                        <span className="soft-indigo">u</span>
-                        <span className="soft-violet">l</span>
-                        <span className="soft-red">a</span>
-                        <span className="soft-orange">t</span>
-                        <span className="soft-green">o</span>
-                        <span className="soft-blue">r</span>
+                        Class Calculator
                     </div>
             </div>
             <div className="input">
@@ -247,10 +313,11 @@ function Laurel() {
                 {kids.map((kid) => (
                     <div key={kid.id} className="kid-item">
                         <span className="kid-name">{kid.name}</span>
-                        <span className="kid-date">Birth date: {kid.date.toDateString()}</span>
-                        <span className="kid-date">Infant grad date: {kid.infantGradDate.toDateString()}</span>
-                        <span className="kid-date">Waddler grad date: {kid.waddlerGradDate.toDateString()}</span>
-                        <span className="kid-date">Toddler grad date: {kid.toddlerGradDate.toDateString()}</span>
+                        <span className="kid-date">Birth date: {formatDate(kid.date)}</span>
+                        <span className="kid-date">Infant grad date: {formatDate(kid.infantGradDate)}</span>
+                        <span className="kid-date">Waddler grad date: {formatDate(kid.waddlerGradDate)}</span>
+                        <span className="kid-date">Toddler grad date: {formatDate(kid.toddlerGradDate)}</span>
+                        <button type="button" className="edit-btn" onClick={() => handleEdit(kid)}>Edit</button>
                         <button type="button" className="remove-btn" onClick={() => removeKid(kid.id)}>X</button>
                     </div>
                 ))}
@@ -261,13 +328,13 @@ function Laurel() {
                 <p>Add a name and birthday (in MM/DD/YYYY format) at the top, and click 'Add' to add them to the calendar. Children can be removed from the calendar by clicking the red X after their name in the list below the calendar.</p>
                 <p>The calendar will default to the current year, {currentYear}, but this can be changed to see past and future groupings by changing the year value in the 'Generate for year' input.</p>
                 <p>Once you've added all the children, you can press Control + P at the same time to open the print dialog, and print the calendar.</p>
-                <p>NOTE: Data is stored *locally*. So if you use the same computer, the same kids entered will be saved between sessions. If you use a different computer though, your entries will not be saved.</p>
-                <p>💘</p>
+                <p>NOTE: Data is stored locally. So if you use the same computer, the same kids entered will be saved between sessions. If you use a different computer though, your entries will not be saved.</p>
             </div>
+            {editingKid && <EditModal kid={editingKid} editFunction={editKid} close={closeModal}/>}
         </div>
     );
 }
 
 // Render your React component
 const root = createRoot(document.getElementById('app'));
-root.render(<Laurel />);
+root.render(<ClassCalc />);
