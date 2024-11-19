@@ -12,6 +12,14 @@ const formatDate = (date) => {
     return `${month}/${day}/${year}`;
 };
 
+function addModal({ kid, addFunction, close}) {
+    return (
+        <>
+
+        </>
+    )
+}
+
 function EditModal({ kid, editFunction, close }) {
     function formatDateToInput(date) {
         const year = date.getFullYear();
@@ -21,12 +29,17 @@ function EditModal({ kid, editFunction, close }) {
     }
 
     console.log(kid);
+    const [name, setName] = useState(kid.name);
     const [date, setDate] = useState(formatDateToInput(kid.date));
+    const [enrollDate, setEnrollDate] = useState(formatDateToInput(kid.enrollDate));
     const [infantDate, setInfantDate] = useState(formatDateToInput(kid.infantGradDate));
     const [waddlerDate, setWaddlerDate] = useState(formatDateToInput(kid.waddlerGradDate));
     const [toddlerDate, setToddlerDate] = useState(formatDateToInput(kid.toddlerGradDate));
     const handleDate = (date) => {
         setDate(date);
+    }
+    const handleEnrollDate = (date) => {
+        setEnrollDate(date);
     }
     const handleInfantDate = (date) => {
         setInfantDate(date);
@@ -37,12 +50,17 @@ function EditModal({ kid, editFunction, close }) {
     const handleToddlerDate = (date) => {
         setToddlerDate(date);
     }
+    const handleName = (name) => {
+        setName(name);
+    }
 
     const saveAllInfo = () => {
         editFunction(kid.id, 'date', date.replace(/-/g, '/'));
+        editFunction(kid.id, 'enrollDate', enrollDate.replace(/-/g, '/'));
         editFunction(kid.id, 'infantGradDate', infantDate.replace(/-/g, '/'));
         editFunction(kid.id, 'waddlerGradDate', waddlerDate.replace(/-/g, '/'));
         editFunction(kid.id, 'toddlerGradDate', toddlerDate.replace(/-/g, '/'));
+        editFunction(kid.id, 'name', name);
     }
 
     const exitModal = () => {
@@ -58,22 +76,26 @@ function EditModal({ kid, editFunction, close }) {
                     </div>
                     <div className='modal-line'>
                         <span>Name:</span>
-                        <span>{kid.name}</span>
+                        <span><input type="text" value={name} onChange={(e) => {handleName(e.target.value)}} /></span>
                     </div>
                     <div className='modal-line'>
-                        <span>Bday:</span>
+                        <span>Birth date:</span>
                         <span><input type="date" onChange={(e) => {handleDate(e.target.value)}} value={date} /></span>
                     </div>
                     <div className='modal-line'>
-                        <span>Infant:</span>
+                        <span>Enrollment date:</span>
+                        <span><input type="date" onChange={(e) => {handleEnrollDate(e.target.value)}} value={enrollDate} /></span>
+                    </div>
+                    <div className='modal-line'>
+                        <span>Infant graduation date:</span>
                         <span><input type="date" onChange={(e) => {handleInfantDate(e.target.value)}} value={infantDate} /></span>
                     </div>
                     <div className='modal-line'>
-                        <span>Waddler:</span>
+                        <span>Waddler graduation date:</span>
                         <span><input type="date" onChange={(e) => {handleWaddlerDate(e.target.value)}} value={waddlerDate} /></span>
                     </div>
                     <div className='modal-line'>
-                        <span>Toddler:</span>
+                        <span>Toddler graduation date:</span>
                         <span><input type="date" onChange={(e) => {handleToddlerDate(e.target.value)}} value={toddlerDate} /></span>
                     </div>
                     <button onClick={() => saveAllInfo()}>Save</button>
@@ -104,11 +126,14 @@ function ClassCalc() {
 
     const [kids, setKids] = useState([]);
     const [name, setName] = useState("");
+
     const [date, setDate] = useState("");
+    const [enrollDate, setEnrollDate] = useState("");
     const [infantDate, setInfantDate] = useState("");
     const [waddlerDate, setWaddlerDate] = useState("");
     const [toddlerDate, setToddlerDate] = useState("");
     const [year, setYear] = useState(currentYear);
+
     const [id, setId] = useState(0);
     const [editingKid, setEditingKid] = useState();
 
@@ -117,6 +142,9 @@ function ClassCalc() {
         const formattedDate = date.replace(/-/g, '/');
         const kidDate = new Date(formattedDate); // Create a new Date using the formatted string
     
+        const formattedEnrollDate = enrollDate ? enrollDate.replace(/-/g, '/') : null;
+        const kidEnrollDate = formattedEnrollDate ? new Date(formattedEnrollDate) : null;
+
         const formattedInfantDate = infantDate ? infantDate.replace(/-/g, '/') : null;
         const kidInfantGradDate = formattedInfantDate ? new Date(formattedInfantDate) : null;
     
@@ -131,6 +159,7 @@ function ClassCalc() {
                 id,
                 name,
                 date: kidDate,
+                enrollDate: kidEnrollDate,
                 infantGradDate: kidInfantGradDate,
                 waddlerGradDate: kidWaddlerGradDate,
                 toddlerGradDate: kidToddlerGradDate
@@ -150,6 +179,7 @@ function ClassCalc() {
             const loadedKids = storedKids.map(kid => ({
                 ...kid,
                 date: new Date(kid.date),
+                enrollDate: kid.enrollDate ? new Date(kid.enrollDate) : null,
                 infantGradDate: kid.infantGradDate ? new Date(kid.infantGradDate) : null,
                 waddlerGradDate: kid.waddlerGradDate ? new Date(kid.waddlerGradDate) : null,
                 toddlerGradDate: kid.toddlerGradDate ? new Date(kid.toddlerGradDate) : null
@@ -163,6 +193,7 @@ function ClassCalc() {
         const kidsToSave = kids.map(kid => ({
             ...kid,
             date: kid.date.toISOString(),
+            enrollDate: kid.enrollDate ? kid.enrollDate.toISOString() : null,
             infantGradDate: kid.infantGradDate ? kid.infantGradDate.toISOString() : null,
             waddlerGradDate: kid.waddlerGradDate ? kid.waddlerGradDate.toISOString() : null,
             toddlerGradDate: kid.toddlerGradDate ? kid.toddlerGradDate.toISOString() : null
@@ -171,9 +202,16 @@ function ClassCalc() {
     }, [kids]);
 
     const editKid = (id, key, value) => {
-        setKids(prevKids => prevKids.map(kid => 
-            kid.id === id ? { ...kid, [key]: new Date(value) } : kid
-        ));
+        if(key == "name"){
+            console.log("setting name")
+            setKids(prevKids => prevKids.map(kid => 
+                kid.id === id ? { ...kid, [key]: value } : kid
+            ));
+        } else {
+            setKids(prevKids => prevKids.map(kid => 
+                kid.id === id ? { ...kid, [key]: new Date(value) } : kid
+            ));
+        }
         setEditingKid(null);
     };
 
@@ -198,10 +236,15 @@ function ClassCalc() {
         setDate(newDate);
 
         const formattedDate = new Date(newDate);
+        setEnrollDate(new Date(formattedDate.setFullYear(formattedDate.getFullYear())).toISOString().split('T')[0]);
         setInfantDate(new Date(formattedDate.setFullYear(formattedDate.getFullYear() + 1)).toISOString().split('T')[0]);
         setWaddlerDate(new Date(formattedDate.setFullYear(formattedDate.getFullYear() + 1)).toISOString().split('T')[0]);
         setToddlerDate(new Date(formattedDate.setFullYear(formattedDate.getFullYear() + 1)).toISOString().split('T')[0]);
     };
+
+    const handleEnrollDate = (e) => {
+        setEnrollDate(e.target.value);
+    }
 
     const handleInfantDate = (e) => {
         setInfantDate(e.target.value);
@@ -231,7 +274,7 @@ function ClassCalc() {
                 let isWaddler = false;
                 let isToddler = false;
                 const daysSinceBirth = Math.floor((currentDate - kid.date) / (1000 * 60 * 60 * 24));
-                if(currentDate >= 0 && currentDate < kid.infantGradDate && daysSinceBirth >= 0){
+                if(currentDate >= 0 && currentDate < kid.infantGradDate && daysSinceBirth >= 0 && currentDate > kid.enrollDate){
                     isInfant = true;
                 } else if (currentDate >= kid.infantGradDate && currentDate < kid.waddlerGradDate){
                     isWaddler = true;
@@ -265,6 +308,10 @@ function ClassCalc() {
                     <div className="vert">
                         <div>Birth date</div>
                         <input type="date" name="bday" id="bday" value={date} onChange={handleDate} />
+                    </div>
+                    <div className="vert">
+                        <div>Enrollment date</div>
+                        <input type="date" name="iday" id="eday" value={enrollDate} onChange={handleEnrollDate} />
                     </div>
                     <div className="vert">
                         <div>Infant grad date</div>
@@ -314,6 +361,7 @@ function ClassCalc() {
                     <div key={kid.id} className="kid-item">
                         <span className="kid-name">{kid.name}</span>
                         <span className="kid-date">Birth date: {formatDate(kid.date)}</span>
+                        <span className="kid-date">Enrollment date: {formatDate(kid.enrollDate)}</span>
                         <span className="kid-date">Infant grad date: {formatDate(kid.infantGradDate)}</span>
                         <span className="kid-date">Waddler grad date: {formatDate(kid.waddlerGradDate)}</span>
                         <span className="kid-date">Toddler grad date: {formatDate(kid.toddlerGradDate)}</span>
