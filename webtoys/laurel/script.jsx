@@ -28,39 +28,32 @@ function EditModal({ kid, editFunction, close }) {
         return `${year}-${month}-${day}`;
     }
 
-    console.log(kid);
-    const [name, setName] = useState(kid.name);
-    const [date, setDate] = useState(formatDateToInput(kid.date));
-    const [enrollDate, setEnrollDate] = useState(formatDateToInput(kid.enrollDate));
-    const [infantDate, setInfantDate] = useState(formatDateToInput(kid.infantGradDate));
-    const [waddlerDate, setWaddlerDate] = useState(formatDateToInput(kid.waddlerGradDate));
-    const [toddlerDate, setToddlerDate] = useState(formatDateToInput(kid.toddlerGradDate));
-    const handleDate = (date) => {
-        setDate(date);
-    }
-    const handleEnrollDate = (date) => {
-        setEnrollDate(date);
-    }
-    const handleInfantDate = (date) => {
-        setInfantDate(date);
-    }
-    const handleWaddlerDate = (date) => {
-        setWaddlerDate(date);
-    }
-    const handleToddlerDate = (date) => {
-        setToddlerDate(date);
-    }
-    const handleName = (name) => {
-        setName(name);
+    const [kidDetails, setKidDetails] = useState({
+        name: kid.name,
+        date: formatDateToInput(kid.date),
+        enrollDate: formatDateToInput(kid.enrollDate),
+        infantDate: formatDateToInput(kid.infantGradDate),
+        waddlerDate: formatDateToInput(kid.waddlerGradDate),
+        toddlerDate: formatDateToInput(kid.toddlerGradDate)
+    });
+
+    const handleDetail = (key, value) => {
+        setKidDetails((prev) => ({...prev, [key]: value}));
     }
 
     const saveAllInfo = () => {
-        editFunction(kid.id, 'date', date.replace(/-/g, '/'));
-        editFunction(kid.id, 'enrollDate', enrollDate.replace(/-/g, '/'));
-        editFunction(kid.id, 'infantGradDate', infantDate.replace(/-/g, '/'));
-        editFunction(kid.id, 'waddlerGradDate', waddlerDate.replace(/-/g, '/'));
-        editFunction(kid.id, 'toddlerGradDate', toddlerDate.replace(/-/g, '/'));
-        editFunction(kid.id, 'name', name);
+        const updates = {
+            date: kidDetails.date.replace(/-/g, '/'),
+            enrollDate: kidDetails.enrollDate.replace(/-/g, '/'),
+            infantGradDate: kidDetails.infantDate.replace(/-/g, '/'),
+            waddlerGradDate: kidDetails.waddlerDate.replace(/-/g, '/'),
+            toddlerGradDate: kidDetails.toddlerDate.replace(/-/g, '/'),
+            name: kidDetails.name,
+        }
+
+        Object.entries(updates).forEach(([key, value]) => {
+            editFunction(kid.id, key, value);
+        })
     }
 
     const exitModal = () => {
@@ -76,27 +69,27 @@ function EditModal({ kid, editFunction, close }) {
                     </div>
                     <div className='modal-line'>
                         <span>Name:</span>
-                        <span><input type="text" value={name} onChange={(e) => {handleName(e.target.value)}} /></span>
+                        <span><input type="text" value={kidDetails.name} onChange={(e) => {handleDetail('name', e.target.value)}} /></span>
                     </div>
                     <div className='modal-line'>
                         <span>Birth date:</span>
-                        <span><input type="date" onChange={(e) => {handleDate(e.target.value)}} value={date} /></span>
+                        <span><input type="date" value={kidDetails.date} onChange={(e) => {handleDetail('date', e.target.value)}} /></span>
                     </div>
                     <div className='modal-line'>
                         <span>Enrollment date:</span>
-                        <span><input type="date" onChange={(e) => {handleEnrollDate(e.target.value)}} value={enrollDate} /></span>
+                        <span><input type="date" value={kidDetails.enrollDate} onChange={(e) => {handleDetail('enrollDate', e.target.value)}} /></span>
                     </div>
                     <div className='modal-line'>
                         <span>Infant graduation date:</span>
-                        <span><input type="date" onChange={(e) => {handleInfantDate(e.target.value)}} value={infantDate} /></span>
+                        <span><input type="date" value={kidDetails.infantDate} onChange={(e) => {handleDetail('infantDate', e.target.value)}} /></span>
                     </div>
                     <div className='modal-line'>
                         <span>Waddler graduation date:</span>
-                        <span><input type="date" onChange={(e) => {handleWaddlerDate(e.target.value)}} value={waddlerDate} /></span>
+                        <span><input type="date" value={kidDetails.waddlerDate} onChange={(e) => {handleDetail('waddlerDate', e.target.value)}} /></span>
                     </div>
                     <div className='modal-line'>
                         <span>Toddler graduation date:</span>
-                        <span><input type="date" onChange={(e) => {handleToddlerDate(e.target.value)}} value={toddlerDate} /></span>
+                        <span><input type="date" value={kidDetails.toddlerDate} onChange={(e) => {handleDetail('toddlerDate', e.target.value)}} /></span>
                     </div>
                     <button onClick={() => saveAllInfo()}>Save</button>
                     <button onClick={() => exitModal()}>Exit</button>
@@ -203,7 +196,6 @@ function ClassCalc() {
 
     const editKid = (id, key, value) => {
         if(key == "name"){
-            console.log("setting name")
             setKids(prevKids => prevKids.map(kid => 
                 kid.id === id ? { ...kid, [key]: value } : kid
             ));
@@ -304,30 +296,39 @@ function ClassCalc() {
             </div>
             <div className="input">
                 <div className="controls">
-                    <input type="text" name="kid" id="kid" placeholder="Name" value={name} onChange={handleName} />
-                    <div className="vert">
-                        <div>Birth date</div>
-                        <input type="date" name="bday" id="bday" value={date} onChange={handleDate} />
+                    <div className="controls-grid">
+                        <div className="vert">
+                            <div>Name</div>
+                            <input type="text" name="kid" id="kid" placeholder="Name" value={name} onChange={handleName} />
+                        </div>
+                        <div className="vert">
+                            <div>Birth date</div>
+                            <input type="date" name="bday" id="bday" value={date} onChange={handleDate} />
+                        </div>
+                        <div className="vert">
+                            <div>Enrollment date</div>
+                            <input type="date" name="iday" id="eday" value={enrollDate} onChange={handleEnrollDate} />
+                        </div>
+                        <div className="vert">
+                            <div>Infant grad date</div>
+                            <input type="date" name="iday" id="iday" value={infantDate} onChange={handleInfantDate} />
+                        </div>
+                        <div className="vert">
+                            <div>Waddler grad date</div>
+                            <input type="date" name="wday" id="wday" value={waddlerDate} onChange={handleWaddlerDate} />
+                        </div>
+                        <div className="vert">
+                            <div>Toddler grad date</div>
+                            <input type="date" name="tday" id="tday" value={toddlerDate} onChange={handleToddlerDate} />
+                        </div>
                     </div>
-                    <div className="vert">
-                        <div>Enrollment date</div>
-                        <input type="date" name="iday" id="eday" value={enrollDate} onChange={handleEnrollDate} />
+                    <div className='lower-controls'>
+                        <button type="button" onClick={addKid}>Add</button>
+                        <div className='year-controls'>
+                            <label htmlFor="date">Generate for year:</label>
+                            <input id="date" type="number" min="1900" max="2099" step="1" value={year} onChange={handleYear} />
+                        </div>
                     </div>
-                    <div className="vert">
-                        <div>Infant grad date</div>
-                        <input type="date" name="iday" id="iday" value={infantDate} onChange={handleInfantDate} />
-                    </div>
-                    <div className="vert">
-                        <div>Waddler grad date</div>
-                        <input type="date" name="wday" id="wday" value={waddlerDate} onChange={handleWaddlerDate} />
-                    </div>
-                    <div className="vert">
-                        <div>Toddler grad date</div>
-                        <input type="date" name="tday" id="tday" value={toddlerDate} onChange={handleToddlerDate} />
-                    </div>
-                    <button type="button" onClick={addKid}>Add</button>
-                    <label htmlFor="date">Generate for year:</label>
-                    <input id="date" type="number" min="1900" max="2099" step="1" value={year} onChange={handleYear} />
                 </div>
             </div>
             <div>
@@ -365,7 +366,7 @@ function ClassCalc() {
                         <span className="kid-date">Infant grad date: {formatDate(kid.infantGradDate)}</span>
                         <span className="kid-date">Waddler grad date: {formatDate(kid.waddlerGradDate)}</span>
                         <span className="kid-date">Toddler grad date: {formatDate(kid.toddlerGradDate)}</span>
-                        <button type="button" className="edit-btn" onClick={() => handleEdit(kid)}>Edit</button>
+                        <button type="button" onClick={() => handleEdit(kid)}>Edit</button>
                         <button type="button" className="remove-btn" onClick={() => removeKid(kid.id)}>X</button>
                     </div>
                 ))}
